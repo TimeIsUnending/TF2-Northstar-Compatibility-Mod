@@ -142,6 +142,7 @@ void function OnShowMainMenuPanel()
 	NSSetModEnabled( "Northstar.Client", true )
 	NSSetModEnabled( "Northstar.CustomServers", true )
 	NSSetModEnabled( "Northstar.Custom", true )
+	ClientCommand( "reload_mods" )
 	SetConVarInt( "mp_allowed", 1 )
 	//NSC end
 	Signal( uiGlobal.signalDummy, "EndShowMainMenuPanel" )
