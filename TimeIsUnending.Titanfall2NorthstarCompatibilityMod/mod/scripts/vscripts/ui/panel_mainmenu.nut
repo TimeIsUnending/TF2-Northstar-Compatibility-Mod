@@ -424,7 +424,7 @@ void function UpdatePlayButton( var button )
 				message = "#ORIGIN_UPDATE_AVAILABLE"
 				file.mpButtonActivateFunc = null
 			}
-			else if ( button == file.fdButton && GetConVarInt( "ns_has_agreed_to_send_token" ) != NS_AGREED_TO_SEND_TOKEN )
+			else if ( button == file.fdButton && GetConVarInt( "ns_has_agreed_to_send_token" ) != 1 )
 			{
 				message = "#AUTHENTICATIONAGREEMENT_NO"
 				file.mpButtonActivateFunc = null
@@ -506,7 +506,7 @@ void function TryUnlockNorthstarButton()
 	// unlock "Launch Northstar" button until you're authed with masterserver, are allowing insecure auth, or 7.5 seconds have passed
 	float time = Time()
 
-	while ( GetConVarInt( "ns_has_agreed_to_send_token" ) != NS_AGREED_TO_SEND_TOKEN || time + 10.0 > Time() )
+	while ( GetConVarInt( "ns_has_agreed_to_send_token" ) != 1 || time + 10.0 > Time() )
 	{
 		if ( ( NSIsMasterServerAuthenticated() && IsStryderAuthenticated() ) || GetConVarBool( "ns_auth_allow_insecure" ) )
 			break
@@ -522,6 +522,7 @@ void function OnPlayFDButton_Activate( var button ) // repurposed for launching 
 	if ( !Hud_IsLocked( button ) )
 	{
 		SetConVarBool( "ns_is_modded_server", true )
+		SetConVarInt( "nsc_vanilla", 0 )
 		SetConVarString( "communities_hostname", "" ) // disable communities due to crash exploits that are still possible through it
 		NSTryAuthWithLocalServer()
 		thread TryAuthWithLocalServer()
@@ -592,12 +593,14 @@ void function OnPlayMPButton_Activate( var button )
 		Lobby_SetAutoFDOpen( false )
 		// Lobby_SetFDMode( false )
 		SetConVarBool( "ns_is_modded_server", false )
-
+		SetConVarInt( "nsc_vanilla", 1 )
 		//NSC start
 		NSSetModEnabled( "Northstar.Client", false )
 		NSSetModEnabled( "Northstar.CustomServers", false )
 		NSSetModEnabled( "Northstar.Custom", false )
 		ClientCommand( "reload_mods" )
+		SetConVarInt( "nsc_vanilla", 1 )
+		SetupComboButtonTest( GetMenu( "LobbyMenu" ) )
 		//NSC end
 
 		thread file.mpButtonActivateFunc()
