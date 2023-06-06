@@ -3,5 +3,12 @@
     "Description": "A mod to allow access to vanilla MP through Northstar Client more easily",
     "Version": "1.0.0",
 
-    "LoadPriority": "0"
+    "LoadPriority": "0",
+
+    "ConVars": [
+        {
+            "Name": "nsc_vanilla",
+            "DefaultValue": "0"
+        }
+    ]
 }
