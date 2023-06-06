@@ -1,0 +1,7 @@
+{
+    "Name": "Titanfall 2 Northstar Compatibility",
+    "Description": "A mod to allow access to vanilla MP through Northstar Client more easily",
+    "Version": "1.0.0",
+
+    "LoadPriority": "0"
+}
