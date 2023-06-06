@@ -424,7 +424,7 @@ void function UpdatePlayButton( var button )
 				message = "#ORIGIN_UPDATE_AVAILABLE"
 				file.mpButtonActivateFunc = null
 			}
-			else if ( button == file.fdButton && GetConVarInt( "ns_has_agreed_to_send_token" ) != 1 )
+			else if ( button == file.fdButton && GetConVarInt( "ns_has_agreed_to_send_token" ) != 1 ) //changed NS_AGREED_TO_SEND_TOKEN to a 1 for NSC
 			{
 				message = "#AUTHENTICATIONAGREEMENT_NO"
 				file.mpButtonActivateFunc = null
@@ -506,7 +506,7 @@ void function TryUnlockNorthstarButton()
 	// unlock "Launch Northstar" button until you're authed with masterserver, are allowing insecure auth, or 7.5 seconds have passed
 	float time = Time()
 
-	while ( GetConVarInt( "ns_has_agreed_to_send_token" ) != 1 || time + 10.0 > Time() )
+	while ( GetConVarInt( "ns_has_agreed_to_send_token" ) != 1 || time + 10.0 > Time() ) //changed NS_AGREED_TO_SEND_TOKEN to a 1 for NSC
 	{
 		if ( ( NSIsMasterServerAuthenticated() && IsStryderAuthenticated() ) || GetConVarBool( "ns_auth_allow_insecure" ) )
 			break
